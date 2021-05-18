@@ -12,9 +12,20 @@ import {
 import './App.css';
 
 class App extends Component {
+  state = {
+    token: window.localStorage.getItem('TOKEN')
+  }
+
+  handleUser = user => {
+    window.localStorage.setItem('TOKEN', user.token);
+    this.setState({ token: user.token });
+  }
 
   render() {
+    const { token } = this.state;
+
     return (
+
       <div className="App">
         <Router>
           <Header />
@@ -29,13 +40,17 @@ class App extends Component {
 
               <Route path="/auth" exact={true}
                 render={routerProps => (
-                  <AuthPage {...routerProps} />
+                  <AuthPage {...routerProps}
+
+                    onUser={this.handleUser} />
                 )}
               />
 
               <Route path="/todos" exact={true}
                 render={routerProps => (
-                  <div>Implement a page of resources</div>
+                  token
+                    ? < div >Tado Page!</div>
+                    : <Redirect to="/auth" />
 
                 )}
               />
