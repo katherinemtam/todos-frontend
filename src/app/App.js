@@ -3,7 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Home from '../home/Home';
 import AuthPage from '../auth/AuthPage';
-import Tado from '../tados/TadosList';
+import TadoList from '../tados/TadoList';
 import {
   BrowserRouter as Router,
   Route,
@@ -50,7 +50,7 @@ class App extends Component {
               <Route path="/todos" exact={true}
                 render={routerProps => (
                   token
-                    ? <Tado {...routerProps}/>
+                    ? <TadoList {...routerProps} />
                     : <Redirect to="/auth" />
 
                 )}

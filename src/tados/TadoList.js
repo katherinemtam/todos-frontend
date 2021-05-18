@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { addTask } from '../utils/open-at-your-own-risk';
-import './TadosList.css';
+import './TadoList.css';
 
 class TadoList extends Component {
-  state = { 
+  state = {
     task: '',
     tadoList: []
   }
@@ -25,12 +25,12 @@ class TadoList extends Component {
 
 
 
-  render() { 
+  render() {
     const { task } = this.state;
-    return ( 
-      <div className="TadosList">
+    return (
+      <div className="TadoList">
         <form onSubmit={this.handleAdd}>
-          <input value={task} placeholder="Do better. At least add somthing..." onChange={this.handleTaskChange}/>
+          <input value={task} placeholder="Do better. At least add somthing..." onChange={this.handleTaskChange} />
 
         </form>
 
@@ -39,5 +39,5 @@ class TadoList extends Component {
     );
   }
 }
- 
+
 export default TadoList;
