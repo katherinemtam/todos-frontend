@@ -7,16 +7,30 @@ class AuthPage extends Component {
     isSignUp: true,
     name: '',
     email: '',
-    password: ''
+    password: '',
+    error: ''
   }
 
   handleSwitch = () => {
     this.setState({ isSignup: !this.state.isSignUp });
   }
 
-  handSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-    console.log(this.state);
+    const { isSignUp } = this.state;
+    this.setState({ error: '' });
+
+    try {
+      const action = isSignUp ? signUp : signIn;
+
+      const user = await action(this.state);
+
+      console.log(user);
+    }
+    catch (err){
+      console.log(err.message);
+      this.setState({ error: err.error });
+    }
   }
 
   handleNameChange = ({ target }) => {
@@ -38,7 +52,7 @@ class AuthPage extends Component {
   }
 
   render() {
-    const { isSignUp, name, email, password } = this.state;
+    const { isSignUp, name, email, password, error } = this.state;
 
     return (
       <div className="AuthPage">
@@ -49,7 +63,10 @@ class AuthPage extends Component {
           {
             isSignUp && <p>
               <label>
-                <input name="name" placeholder="Name"
+                <input 
+                  name="name" 
+                  value={name}
+                  placeholder="Name"
                   required={true}
                   onChange={this.handleNameChange} />
               </label>
@@ -58,7 +75,10 @@ class AuthPage extends Component {
 
           <p>
             <label>
-              <input name="email" placeholder="Email"
+              <input 
+                name="email" 
+                value={email}
+                placeholder="Email"
                 required={true}
                 onChange={this.handleEmailChange} />
             </label>
@@ -66,7 +86,11 @@ class AuthPage extends Component {
 
           <p>
             <label>
-              <input name="email" type="password" placeholder="Password"
+              <input 
+                name="email" 
+                type="password" 
+                value={password}
+                placeholder="Password"
                 required={true}
                 onChange={this.handlePasswordChange} />
             </label>
@@ -87,6 +111,9 @@ class AuthPage extends Component {
               }
             </button>
           </p>
+
+          {error && <p>{error}</p>}
+
         </form>
       </div>
 
