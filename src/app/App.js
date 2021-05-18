@@ -55,12 +55,6 @@ class App extends Component {
                 )}
               />
 
-              <Route path="/todos/:id"
-                render={routerProps => (
-                  <div>Implement a page for id {routerProps.match.params.id}</div>
-                )}
-              />
-
               <Redirect to="/" />
 
             </Switch>
