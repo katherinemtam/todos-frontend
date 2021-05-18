@@ -29,17 +29,18 @@ class App extends Component {
 
               <Route path="/auth" exact={true}
                 render={routerProps => (
-                  <AuthPage {...routerProps}/>
+                  <AuthPage {...routerProps} />
                 )}
               />
 
-              <Route path="/resources" exact={true}
+              <Route path="/todos" exact={true}
                 render={routerProps => (
                   <div>Implement a page of resources</div>
+
                 )}
               />
 
-              <Route path="/resources/:id"
+              <Route path="/todos/:id"
                 render={routerProps => (
                   <div>Implement a page for id {routerProps.match.params.id}</div>
                 )}

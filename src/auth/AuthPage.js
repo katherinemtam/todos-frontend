@@ -1,70 +1,99 @@
 import React, { Component } from 'react';
 import './AuthPage.css';
+import { signIn, signUp } from '../utils/open-at-your-own-risk.js';
 
 class AuthPage extends Component {
   state = {
-    isSignUp: true
+    isSignUp: true,
+    name: '',
+    email: '',
+    password: ''
   }
 
-   handleSwitch = () => {
-     this.setState({ isSignup: !this.state.isSignUp });
-   }
+  handleSwitch = () => {
+    this.setState({ isSignup: !this.state.isSignUp });
+  }
 
-   handSubmit = e => {
-     e.preventDefault();
-   }
+  handSubmit = e => {
+    e.preventDefault();
+    console.log(this.state);
+  }
 
-   render() { 
-     const { isSignUp } = this.state;
-    
-     return ( 
-       <div className="AuthPage">
+  handleNameChange = ({ target }) => {
+    this.setState({
+      name: target.value
+    });
+  }
 
-         <h2>Sign {isSignUp ? 'Up' : 'In'}</h2>
+  handleEmailChange = ({ target }) => {
+    this.setState({
+      email: target.value
+    });
+  }
 
-         <form className="AuthPage" onSubmit={this.handleSubmit}>
-           {
-             isSignUp && <p>
-               <label>
-                 <input name="name" placeholder="Name"/>
-               </label>
-             </p>
-           }
+  handlePasswordChange = ({ target }) => {
+    this.setState({
+      password: target.value
+    });
+  }
 
-           <p>
-             <label>
-               <input name="email" placeholder="Email"/>
-             </label>
-           </p>
+  render() {
+    const { isSignUp, name, email, password } = this.state;
 
-           <p>
-             <label>
-               <input name="email" type="password" placeholder="Password"/>
-             </label>
-           </p>
+    return (
+      <div className="AuthPage">
 
-           <p>
-             <button>
-             Sign {isSignUp ? 'Up' : 'In'}
-             </button>
-           </p>
+        <h2>Sign {isSignUp ? 'Up' : 'In'}</h2>
 
-           <p>
-             <button onClick={this.handleSwitch}>
-               {
-                 isSignUp
-                   ? 'Already have an account?'
-                   : 'Need to create an account?'
-               }
-             </button>
-           </p>
-         </form>
-       </div>
+        <form className="AuthPage" onSubmit={this.handleSubmit}>
+          {
+            isSignUp && <p>
+              <label>
+                <input name="name" placeholder="Name"
+                  required={true}
+                  onChange={this.handleNameChange} />
+              </label>
+            </p>
+          }
 
-     );
-   }
+          <p>
+            <label>
+              <input name="email" placeholder="Email"
+                required={true}
+                onChange={this.handleEmailChange} />
+            </label>
+          </p>
+
+          <p>
+            <label>
+              <input name="email" type="password" placeholder="Password"
+                required={true}
+                onChange={this.handlePasswordChange} />
+            </label>
+          </p>
+
+          <p>
+            <button type="submit">
+              Sign {isSignUp ? 'Up' : 'In'}
+            </button>
+          </p>
+
+          <p>
+            <button type="button" className="switch" onClick={this.handleSwitch}>
+              {
+                isSignUp
+                  ? 'Already have an account?'
+                  : 'Need to create an account?'
+              }
+            </button>
+          </p>
+        </form>
+      </div>
+
+    );
+  }
 }
- 
+
 export default AuthPage;
 
 
