@@ -12,48 +12,53 @@ class AuthPage extends Component {
   }
 
   handleSwitch = () => {
-    this.setState({ isSignup: !this.state.isSignUp });
+    this.setState({ isSignUp: !this.state.isSignUp });
   }
 
   handleSubmit = async e => {
     e.preventDefault();
     const { isSignUp } = this.state;
+    const { onUser, history } = this.props;
+
     this.setState({ error: '' });
 
     try {
       const action = isSignUp ? signUp : signIn;
 
       const user = await action(this.state);
-
-      console.log(user);
+      
+      onUser(user);
+      
+      history.push('/');
     }
     catch (err){
       console.log(err.message);
       this.setState({ error: err.error });
     }
   }
-
+  
   handleNameChange = ({ target }) => {
     this.setState({
       name: target.value
     });
   }
-
+  
   handleEmailChange = ({ target }) => {
     this.setState({
       email: target.value
     });
   }
-
+  
   handlePasswordChange = ({ target }) => {
     this.setState({
       password: target.value
     });
   }
-
+  
   render() {
     const { isSignUp, name, email, password, error } = this.state;
-
+    
+    console.log(this.props.onUser);
     return (
       <div className="AuthPage">
 
