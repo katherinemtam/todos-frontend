@@ -3,7 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Home from '../home/Home';
 import AuthPage from '../auth/AuthPage';
-import TadoList from '../tados/TadoList';
+import TadoList from '../temp/TadoList';
 import {
   BrowserRouter as Router,
   Route,

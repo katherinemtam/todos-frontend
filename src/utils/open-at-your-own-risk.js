@@ -4,7 +4,7 @@ import request from 'superagent';
 
 export async function signUp(credentials) {
   const response = await request
-    .post('/auth/signup')
+    .post('/api/auth/signup')
     .ok(res => res.status < 500)
     .send(credentials);
 
@@ -17,7 +17,7 @@ export async function signUp(credentials) {
 
 export async function signIn(credentials) {
   const response = await request
-    .post('/auth/signin')
+    .post('/api/auth/signin')
     .ok(res => res.status < 500)
     .send(credentials);
 
@@ -29,7 +29,7 @@ export async function signIn(credentials) {
 
 export async function addTask(task) {
   const response = await request
-    .post('/todos')
+    .post('/api/todos')
     .set('Authorization', window.localStorage.getItem('TOKEN'))
     .send(task);
 
@@ -38,7 +38,7 @@ export async function addTask(task) {
 
 export async function getTadoList() {
   const response = await request
-    .get('/me/todos')
+    .get('/api/me/todos')
     .set('Authorization', window.localStorage.getItem('TOKEN'));
   return response.body;
 }

@@ -38,5 +38,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://radiant-badlands-60317.herokuapp.com/api/"
+  "proxy": "https://radiant-badlands-60317.herokuapp.com"
 }

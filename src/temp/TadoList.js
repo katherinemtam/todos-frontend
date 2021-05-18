@@ -41,7 +41,9 @@ class TadoList extends Component {
     this.setState({ task: target.value });
   }
 
+  handDelete = () => {
 
+  };
 
   render() {
     const { task, tadoList } = this.state;
