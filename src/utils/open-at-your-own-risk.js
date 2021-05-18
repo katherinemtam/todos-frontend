@@ -35,3 +35,10 @@ export async function addTask(task) {
 
   return response.body;
 }
+
+export async function getTadoList() {
+  const response = await request
+    .get('/me/todos')
+    .set('Authorization', window.localStorage.getItem('TOKEN'));
+  return response.body;
+}
