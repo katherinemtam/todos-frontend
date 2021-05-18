@@ -3,16 +3,15 @@ import './Header.css';
 
 class Header extends Component {
 
-  render() { 
+  render() {
     return (
       <header className="Header">
-
-        <h1>React App</h1>
-        
+        <h1>The Bestest Tado App</h1>
+        <h2>Your excuses end here.</h2>
       </header>
     );
   }
 
 }
- 
+
 export default Header;
