@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addTask, getTadoList } from '../utils/open-at-your-own-risk';
+import { addTask, getTadoList, deleteTask } from '../utils/open-at-your-own-risk';
 import './TadoList.css';
 
 class TadoList extends Component {
@@ -41,8 +41,18 @@ class TadoList extends Component {
     this.setState({ task: target.value });
   }
 
-  handDelete = () => {
+  handleDelete = async id => {
+    const { tadoList } = this.state;
 
+    try {
+      await deleteTask(id);
+
+      const updatedTados = tadoList.filter(task => task.id !== id);
+      this.setState({ tadoList: updatedTados });
+    }
+    catch (err){
+      console.log(err);
+    }  
   };
 
   render() {
@@ -63,7 +73,7 @@ class TadoList extends Component {
           {tadoList.map(task => (
             <li key={task.id}>
               <h2>{task.task}</h2>
-              <button>Give Up</button>
+              <button onClick={()=>this.handleDelete(task.id)}>Give Up</button>
             </li>
           ))}
         </ul>
