@@ -12,7 +12,7 @@ export async function signUp(credentials) {
 
 export async function signIn(credentials) {
   const response = await request
-    .post('api/auth/signin')
+    .post('/api/auth/signin')
     .send(credentials);
 
   return response.body;
