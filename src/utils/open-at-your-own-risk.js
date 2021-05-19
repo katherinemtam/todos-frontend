@@ -50,3 +50,12 @@ export async function deleteTask(id){
 
   return response.body;
 }
+
+export async function updateTaskCompleted(task, completed) {
+  const response = await request
+    .put(`/api/todos/${task.id}`)
+    .send(completed)
+    .set('Authorization', window.localStorage.getItem('TOKEN'));
+
+  return response.body;
+}
