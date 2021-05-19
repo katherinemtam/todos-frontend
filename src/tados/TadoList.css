@@ -1,13 +1,17 @@
 .TadoList {
   padding: 30px;
 }
+
+.TadoList input {
+  width: 100px;
+}
+
 .TadoList li {
   margin: 10px 0;
   background: lightsteelblue;
   padding: 5px;
-  display: grid;
-  grid-template-columns: 1fr auto 25px 25px;
-  grid-gap: 10px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -17,24 +21,11 @@
 
 .TadoList li .delete{
   color: white;
-  background: red;
-  font-weight: bold;
-  border: 1px solid red;
-}
-
-.TadoList li .delete{
-  color: white;
-  background: red;
+  background: slategray;
   font-weight: bold;
   border: 0;
   height: 25px;
   cursor: pointer;
-}
-.TadoList li .death{
-  background: white;
-  font-weight: bold;
-  border: 0;
-  place-self: center;
-  height: 25px;
-  cursor: pointer;
+  width: 100px;
+  margin: 0 50px 0px 0px;
 }
