@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addTask, getTadoList } from '../utils/open-at-your-own-risk';
+import { addTask, getTadoList, deleteTask, updateTaskCompleted } from '../utils/open-at-your-own-risk';
 import './TadoList.css';
 
 class TadoList extends Component {
@@ -41,10 +41,37 @@ class TadoList extends Component {
     this.setState({ task: target.value });
   }
 
+  handleDelete = async id => {
+    const { tadoList } = this.state;
 
+    try {
+      await deleteTask(id);
+
+      const updatedTados = tadoList.filter(task => task.id !== id);
+      this.setState({ tadoList: updatedTados });
+    }
+    catch (err){
+      console.log(err);
+    }  
+  };
+
+  handleCompletedChecked = async task => {
+    const { tadoList } = this.state;
+    try {
+      const updatedTask = await updateTaskCompleted(task, { ...task, completed: true });
+
+      const updatedTadoList = tadoList.map(eachTask => eachTask.id === task.id ? updatedTask : eachTask);
+
+      this.setState({ tadoList: updatedTadoList });
+    }
+    catch (err) {
+      console.log(err);
+    }
+  };
 
   render() {
     const { task, tadoList } = this.state;
+    console.log(tadoList);
     return (
       <div className="TadoList">
         {/* "Add New Task" */}
@@ -60,8 +87,25 @@ class TadoList extends Component {
         <ul>
           {tadoList.map(task => (
             <li key={task.id}>
-              <h2>{task.task}</h2>
-              <button>Give Up</button>
+              {!task.completed
+                ? <> 
+                  <input 
+                    type="checkbox" 
+                    value={task.completed}
+                    onChange={() => this.handleCompletedChecked(task)}/>
+                  <h2>{task.task}</h2>
+                </>
+                : <>
+                  <div>Completed</div>
+                  <h2 style={{ textDecoration: 'line-through' }}>{task.task}</h2>
+                </>
+              }
+              {/* <input 
+                type="checkbox" 
+                value={task.completed}
+                onChange={() => this.handleCompletedChecked(task)}/> */}
+              
+              <button className="delete" onClick={()=>this.handleDelete(task.id)}>Give Up</button>
             </li>
           ))}
         </ul>
